@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library of Kihnoxandria</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <div id="header">
+        <h1>Library of Kihnoxandria</h1>
+    </div>
+    <div id="main">
+        <button id="addBook">+ Add Book</button>
+        <div id="form">
+            <form action="">
+                <h2>Add New Book</h2>
+                <label for="title">Title
+                    <input type="text" id="title" name="title">
+                </label>
+                <label for="author">Author
+                    <input type="text" id="author" name="author">
+                </label>
+                <label for="pages">Pages
+                    <input type="text" id="pages" name="pages">
+                </label>
+                <label for="read">Have you read it?
+                    <input type="checkbox" id="read" name="read">
+                </label>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="bookshelf"></div>
+    </div>
+</body>
+</html>
