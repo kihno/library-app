@@ -25,7 +25,12 @@ function addBookToLibrary() {
     newBook.title = title.value;
     newBook.author = author.value;
     newBook.pages = pages.value;
-    newBook.read = read.value;
+
+    if (read.checked) {
+        newBook.read = true;
+    } else {
+        newBook.read = false;
+    }
 
     myLibrary.push(newBook);
 }
@@ -66,17 +71,27 @@ myLibrary.forEach(element => {
 function displayLibrary() {
     const newDiv = document.createElement('div');
     const newBook = myLibrary[myLibrary.length - 1];
+    const button =document.createElement('button');
 
     newDiv.className = 'book';
     bookshelf.appendChild(newDiv);
-
     const bookDiv = document.querySelector('.book');
 
     for (const prop in newBook) {
-        const subDiv = document.createElement('div');
-        subDiv.className = prop;
-        subDiv.textContent = `${newBook[prop]}`;
-        bookDiv.appendChild(subDiv);
+        if (prop === 'read') {
+            if (newBook.read === true) {
+                button.textContent = 'Read';
+                bookDiv.appendChild(button);
+            } else if (newBook.read === false) {
+                button.textContent = 'Unread';
+                bookDiv.appendChild(button);
+            } 
+        } else {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `${newBook[prop]}`;
+            bookDiv.appendChild(subDiv);
+        }
     }
 }
 
