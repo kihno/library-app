@@ -1,11 +1,4 @@
-let myLibrary = [
-    {
-        title: 'The Bible',
-        author: 'God',
-        pages: '1000',
-        read: true,
-    }
-];
+let myLibrary = [];
 
 function Book(title, author, pages) {
     this.title = title
@@ -47,35 +40,24 @@ function clearForm() {
 submit.addEventListener('click', function() {
     addBookToLibrary();
     clearForm();
-    displayLibrary();
+    const newBook = myLibrary[myLibrary.length - 1];
+    displayLibrary(newBook);
 })
 
 const bookshelf = document.getElementById('bookshelf');
 
 myLibrary.forEach(element => {
-    const newDiv = document.createElement('div');
-    
-    newDiv.className = 'book';
-    bookshelf.appendChild(newDiv);
-
-    const bookDiv = document.querySelector('.book');
-
-    for (const prop in element) {
-        const subDiv = document.createElement('div');
-        subDiv.className = prop;
-        subDiv.textContent = `${element[prop]}`;
-        bookDiv.appendChild(subDiv);
-    }
+    displayLibrary(element);
 });
 
-function displayLibrary() {
+
+function displayLibrary(newBook) {
     const newDiv = document.createElement('div');
-    const newBook = myLibrary[myLibrary.length - 1];
     const button =document.createElement('button');
 
     newDiv.className = 'book';
     bookshelf.appendChild(newDiv);
-    const bookDiv = document.querySelector('.book');
+    const bookDiv = document.querySelector('.book:last-of-type');
 
     for (const prop in newBook) {
         if (prop === 'read') {
