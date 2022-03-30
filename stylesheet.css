@@ -1,10 +1,74 @@
+@font-face {
+    font-family: 'capitalismedium';
+    src: url('fonts/minicaps-webfont.woff2') format('woff2'),
+         url('fonts/minicaps-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body, div, h1, h2, h3, p, button, form, span, label, input {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid: 200px 1fr / 1fr 4fr;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Lato', sans-serif;
+}
+
 #header {
-    background-color: blue;
+    background-color: #19535f;
     color: white;
+    grid-area: 1 / 1 / 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-family: 'capitalismedium';
+    font-size: 45px;;
+}
+
+#sidebar {
+    background-color: #7b2d26;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+}
+
+#addBook {
+    cursor: pointer;
+    background-color: inherit;
+    color: white;
+    font-size: 24px;
+    border: 4px solid #f0f3f5;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
+}
+
+#addBook:hover {
+    background-color: #755754;
+    height: 101px;
+    width: 201px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.3);
+}
+
+#addBook:active {
+    height: 99px;
+    width: 199px;
 }
 
 #main {
-    background-color: lightgrey;
+    background-color: #f0f3f5;
+    padding: 20px;
 }
 
 #modal{
@@ -45,19 +109,20 @@
 }
 
 #bookshelf {
-    background-color: brown;
     height: 100vh;
     display: grid;
     gap: 4px;
     padding: 4px;
-    grid-template-rows: repeat(auto, 1fr);
-    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
 }
 
 .book {
-    background-color: white;
-    border: 4px solid blue;
-    height: 5rem;
+    background-color: #d7c9aa;
+    border-radius: 15px;
+    height: 200px;
+    padding: 20px;
 }
 
 .read {

@@ -86,7 +86,6 @@ myLibrary.forEach(element => {
 function displayLibrary(newBook) {
     const newDiv = document.createElement('div');
     const readButton = document.createElement('button');
-    const span = document.createElement('span');
     const bookshelf = document.getElementById('bookshelf');
 
     newDiv.className = 'book';
