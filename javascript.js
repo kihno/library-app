@@ -1,3 +1,4 @@
+//Library
 let myLibrary = [
     {
         title: 'book1',
@@ -26,11 +27,7 @@ function Book(title, author, pages) {
     this.read = read
 }
 
-const title = document.getElementById('title');
-const author = document.getElementById('author');
-const pages = document.getElementById('pages');
-const read = document.getElementById('read');
-
+//Add Book Button
 const modal = document.getElementById('modal');
 const modalBtn = document.getElementById('addBook');
 const closeModal = document.getElementsByClassName('close')[0];
@@ -44,8 +41,13 @@ closeModal.onclick = function() {
     modal.style.display = 'none';
 }
 
-function addBookToLibrary() {
+//Form Submit Functions
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+const read = document.getElementById('read');
 
+function addBookToLibrary() {
     const newBook = Object.create(Book);
     newBook.title = title.value;
     newBook.author = author.value;
@@ -60,8 +62,6 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-const submit = document.getElementById('submit');
-
 function clearForm() {
     title.value = '';
     author.value = '';
@@ -69,30 +69,24 @@ function clearForm() {
     read.checked = false;
 }
 
+const form = document.getElementById('form');
 
-submit.addEventListener('click', function() {
-    
-    /* if (!title.validity.valid) {
-        alert('error');
-    } else { */
-    
-        modal.style.display = 'none';
-        addBookToLibrary();
-        clearForm();
-        const newBook = myLibrary[myLibrary.length - 1];
-        displayLibrary(newBook);
-})
-
-
+form.addEventListener('submit', function() {
+    modal.style.display = 'none';
+    addBookToLibrary();
+    clearForm();
+    const newBook = myLibrary[myLibrary.length - 1];
+    displayLibrary(newBook);
+});
 
 myLibrary.forEach(element => {
     displayLibrary(element);
 });
 
-
 function displayLibrary(newBook) {
     const newDiv = document.createElement('div');
-    const button =document.createElement('button');
+    const readButton = document.createElement('button');
+    const span = document.createElement('span');
     const bookshelf = document.getElementById('bookshelf');
 
     newDiv.className = 'book';
@@ -102,12 +96,15 @@ function displayLibrary(newBook) {
     for (const prop in newBook) {
         if (prop === 'read') {
             if (newBook.read === true) {
-                button.className = 'read';
-                bookDiv.appendChild(button);
+                readButton.className = 'read';
+                bookDiv.appendChild(readButton);
             } else if (newBook.read === false) {
-                button.className = 'unread';
-                bookDiv.appendChild(button);
+                readButton.className = 'unread';
+                bookDiv.appendChild(readButton);
             } 
+
+            
+
         } else {
             const subDiv = document.createElement('div');
             subDiv.className = prop;
@@ -116,11 +113,16 @@ function displayLibrary(newBook) {
         }
     }
 
-    button.addEventListener('click', () => {
-        if (button.className === 'read') {
-            button.className = 'unread';
+    readButton.addEventListener('click', () => {
+        if (readButton.className === 'read') {
+            readButton.className = 'unread';
         } else {
-            button.className = 'read';
+            readButton.className = 'read';
         }
     });
+
+    const removeButton = document.createElement('button');
+    removeButton.className = 'remove';
+    removeButton.textContent = 'Remove';
+    bookDiv.appendChild(removeButton);
 }
