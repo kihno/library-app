@@ -44,12 +44,6 @@ closeModal.onclick = function() {
     modal.style.display = 'none';
 }
 
-// window.onclick = function(e) {
-//     if (e.target !== modal) {
-//         modal.style.display = 'none';
-//     }
-// }
-
 function addBookToLibrary() {
 
     const newBook = Object.create(Book);
@@ -75,7 +69,6 @@ function clearForm() {
     read.checked = false;
 }
 
-const form = document.getElementsByTagName('form')[0];
 
 submit.addEventListener('click', function() {
     
@@ -90,7 +83,7 @@ submit.addEventListener('click', function() {
         displayLibrary(newBook);
 })
 
-const bookshelf = document.getElementById('bookshelf');
+
 
 myLibrary.forEach(element => {
     displayLibrary(element);
@@ -100,6 +93,7 @@ myLibrary.forEach(element => {
 function displayLibrary(newBook) {
     const newDiv = document.createElement('div');
     const button =document.createElement('button');
+    const bookshelf = document.getElementById('bookshelf');
 
     newDiv.className = 'book';
     bookshelf.appendChild(newDiv);
@@ -108,10 +102,10 @@ function displayLibrary(newBook) {
     for (const prop in newBook) {
         if (prop === 'read') {
             if (newBook.read === true) {
-                button.textContent = 'Read';
+                button.className = 'read';
                 bookDiv.appendChild(button);
             } else if (newBook.read === false) {
-                button.textContent = 'Unread';
+                button.className = 'unread';
                 bookDiv.appendChild(button);
             } 
         } else {
@@ -121,6 +115,12 @@ function displayLibrary(newBook) {
             bookDiv.appendChild(subDiv);
         }
     }
+
+    button.addEventListener('click', () => {
+        if (button.className === 'read') {
+            button.className = 'unread';
+        } else {
+            button.className = 'read';
+        }
+    });
 }
-
-
