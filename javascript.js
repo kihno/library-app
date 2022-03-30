@@ -1,22 +1,22 @@
 //Library
 let myLibrary = [
     {
-        title: 'book1',
-        author: 'author one',
-        pages: 123,
+        title: 'Neuromancer',
+        author: 'William Gibson',
+        pages: 271,
         read: true,
     },
     {
-        title: 'book2',
-        author: 'author two',
-        pages: 234,
+        title: 'Count Zero',
+        author: 'William Gibson',
+        pages: 256,
         read: false,
     },
     {
-        title: 'book3',
-        author: 'author three',
-        pages: 345,
-        read: true,
+        title: 'Mona Lisa Overdrive',
+        author: 'William Gibson',
+        pages: 251,
+        read: false,
     }
 ];
 
@@ -103,6 +103,16 @@ function displayLibrary(newBook) {
                 bookDiv.appendChild(readButton);
             } 
 
+        } else if (prop === 'author') {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `by ${newBook[prop]}`;
+            bookDiv.appendChild(subDiv);
+        } else if (prop === 'pages') {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `${newBook[prop]} pages`;
+            bookDiv.appendChild(subDiv);
         } else {
             const subDiv = document.createElement('div');
             subDiv.className = prop;
