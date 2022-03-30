@@ -90,6 +90,7 @@ function displayLibrary(newBook) {
     const bookshelf = document.getElementById('bookshelf');
 
     newDiv.className = 'book';
+    newDiv.setAttribute('data-index', myLibrary.indexOf(newBook));
     bookshelf.appendChild(newDiv);
     const bookDiv = document.querySelector('.book:last-of-type');
 
@@ -102,8 +103,6 @@ function displayLibrary(newBook) {
                 readButton.className = 'unread';
                 bookDiv.appendChild(readButton);
             } 
-
-            
 
         } else {
             const subDiv = document.createElement('div');
@@ -125,4 +124,9 @@ function displayLibrary(newBook) {
     removeButton.className = 'remove';
     removeButton.textContent = 'Remove';
     bookDiv.appendChild(removeButton);
+
+    removeButton.addEventListener('click', () => {
+        myLibrary.splice(removeButton.parentNode.getAttribute('data-index'), 1);
+        removeButton.parentNode.remove();
+    });
 }
