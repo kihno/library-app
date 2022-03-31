@@ -84,6 +84,7 @@ const form = document.getElementById('form');
 
 form.addEventListener('submit', function() {
     modal.style.display = 'none';
+    toggleBlur();
     addBookToLibrary();
     clearForm();
     const newBook = myLibrary[myLibrary.length - 1];
