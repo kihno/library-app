@@ -1,23 +1,23 @@
 //Library
 let myLibrary = [
-    {
-        title: 'Neuromancer',
-        author: 'William Gibson',
-        pages: 271,
-        read: true,
-    },
-    {
-        title: 'Count Zero',
-        author: 'William Gibson',
-        pages: 256,
-        read: false,
-    },
-    {
-        title: 'Mona Lisa Overdrive',
-        author: 'William Gibson',
-        pages: 251,
-        read: false,
-    }
+    // {
+    //     title: 'Neuromancer',
+    //     author: 'William Gibson',
+    //     pages: 271,
+    //     read: true,
+    // },
+    // {
+    //     title: 'Count Zero',
+    //     author: 'William Gibson',
+    //     pages: 256,
+    //     read: false,
+    // },
+    // {
+    //     title: 'Mona Lisa Overdrive',
+    //     author: 'William Gibson',
+    //     pages: 251,
+    //     read: false,
+    // }
 ];
 
 function Book(title, author, pages) {
