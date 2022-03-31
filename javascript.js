@@ -31,13 +31,24 @@ function Book(title, author, pages) {
 const modal = document.getElementById('modal');
 const modalBtn = document.getElementById('addBook');
 const closeModal = document.getElementsByClassName('close')[0];
+const header = document.getElementById('header');
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+
+function toggleBlur() {
+    header.classList.toggle('blur');
+    sidebar.classList.toggle('blur');
+    main.classList.toggle('blur');
+}
 
 modalBtn.onclick = function() {
     modal.style.display = 'grid';
+    toggleBlur();
     title.focus();
 }
 
 closeModal.onclick = function() {
+    toggleBlur();
     modal.style.display = 'none';
 }
 
