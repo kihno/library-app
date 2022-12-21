@@ -20,6 +20,19 @@ let myLibrary = [
     // }
 ];
 
+function init() {
+
+    if (JSON.parse(localStorage.getItem('myLibrary')) !== null) {
+
+        myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+        myLibrary.forEach(element => {
+            displayLibrary(element);
+        });
+    } else {
+        localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    }
+}
+
 class Book {
     constructor(title, author, pages) {
         this.title = title
@@ -29,7 +42,6 @@ class Book {
     }
     
 }
-
 
 const addBook = (() => {
     const modal = document.getElementById('modal');
@@ -61,6 +73,68 @@ const addBook = (() => {
     }
 })();
 
+function displayLibrary(newBook) {
+    const newDiv = document.createElement('div');
+    const readButton = document.createElement('button');
+    const bookshelf = document.getElementById('bookshelf');
+
+    newDiv.className = 'book';
+    newDiv.setAttribute('data-index', myLibrary.indexOf(newBook));
+    bookshelf.appendChild(newDiv);
+    const bookDiv = document.querySelector('.book:last-of-type');
+
+    for (const prop in newBook) {
+        if (prop === 'read') {
+            if (newBook.read === true) {
+                readButton.className = 'read';
+                bookDiv.appendChild(readButton);
+            } else if (newBook.read === false) {
+                readButton.className = 'unread';
+                bookDiv.appendChild(readButton);
+            } 
+
+        } else if (prop === 'author') {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `by ${newBook[prop]}`;
+            bookDiv.appendChild(subDiv);
+        } else if (prop === 'pages') {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `${newBook[prop]} pages`;
+            bookDiv.appendChild(subDiv);
+        } else {
+            const subDiv = document.createElement('div');
+            subDiv.className = prop;
+            subDiv.textContent = `${newBook[prop]}`;
+            bookDiv.appendChild(subDiv);
+        }
+    }
+
+    readButton.addEventListener('click', () => {
+        if (readButton.className === 'read') {
+            readButton.className = 'unread';
+            newBook.read = false;
+            localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+        } else {
+            readButton.className = 'read';
+            newBook.read = true;
+            localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+        }
+    });
+
+    const removeButton = document.createElement('button');
+    removeButton.className = 'remove';
+    removeButton.textContent = 'Remove';
+    bookDiv.appendChild(removeButton);
+
+    removeButton.addEventListener('click', () => {
+        myLibrary.splice(removeButton.parentNode.getAttribute('data-index'), 1);
+        removeButton.parentNode.remove();
+        localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    });
+}
+
 
 const submitForm = (() => {
     const title = document.getElementById('title');
@@ -81,6 +155,7 @@ const submitForm = (() => {
         }
     
         myLibrary.push(newBook);
+        localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     }
     
     function clearForm() {
@@ -105,60 +180,7 @@ const submitForm = (() => {
         displayLibrary(element);
     });
     
-    function displayLibrary(newBook) {
-        const newDiv = document.createElement('div');
-        const readButton = document.createElement('button');
-        const bookshelf = document.getElementById('bookshelf');
     
-        newDiv.className = 'book';
-        newDiv.setAttribute('data-index', myLibrary.indexOf(newBook));
-        bookshelf.appendChild(newDiv);
-        const bookDiv = document.querySelector('.book:last-of-type');
-    
-        for (const prop in newBook) {
-            if (prop === 'read') {
-                if (newBook.read === true) {
-                    readButton.className = 'read';
-                    bookDiv.appendChild(readButton);
-                } else if (newBook.read === false) {
-                    readButton.className = 'unread';
-                    bookDiv.appendChild(readButton);
-                } 
-    
-            } else if (prop === 'author') {
-                const subDiv = document.createElement('div');
-                subDiv.className = prop;
-                subDiv.textContent = `by ${newBook[prop]}`;
-                bookDiv.appendChild(subDiv);
-            } else if (prop === 'pages') {
-                const subDiv = document.createElement('div');
-                subDiv.className = prop;
-                subDiv.textContent = `${newBook[prop]} pages`;
-                bookDiv.appendChild(subDiv);
-            } else {
-                const subDiv = document.createElement('div');
-                subDiv.className = prop;
-                subDiv.textContent = `${newBook[prop]}`;
-                bookDiv.appendChild(subDiv);
-            }
-        }
-    
-        readButton.addEventListener('click', () => {
-            if (readButton.className === 'read') {
-                readButton.className = 'unread';
-            } else {
-                readButton.className = 'read';
-            }
-        });
-    
-        const removeButton = document.createElement('button');
-        removeButton.className = 'remove';
-        removeButton.textContent = 'Remove';
-        bookDiv.appendChild(removeButton);
-    
-        removeButton.addEventListener('click', () => {
-            myLibrary.splice(removeButton.parentNode.getAttribute('data-index'), 1);
-            removeButton.parentNode.remove();
-        });
-    }
 })();
+
+init();
